@@ -33,6 +33,13 @@
 
     <footer>
         <h3>{{ config('app.name') }}</h3>
+
+        <span class="success">{{ session("success") }}</span>
+        <span class="error">{{ session("error") }}</span>
+
+        @auth
+        <x-qqq-button label="Wyloguj" :action="route('logout')"/>
+        @endauth
     </footer>
 
     @bukScripts(true)
