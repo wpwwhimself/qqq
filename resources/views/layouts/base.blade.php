@@ -9,7 +9,24 @@
     @bukStyles(true)
 </head>
 <body>
-    @yield("content")
+    <header>
+        <h1>
+            @yield("title")
+            <small>@yield("subtitle")</small>
+        </h1>
+    </header>
+
+    <nav>
+        <a href="{{ route('clients-list') }}">Klienci</a>
+    </nav>
+
+    <main>
+        @yield("content")
+    </main>
+
+    <footer>
+        {{ config('app.name') }}
+    </footer>
 
     @bukScripts(true)
 </body>
