@@ -24,12 +24,14 @@
             <td>{{ $commission->client->company_name }}</td>
             <td>{{ $commission->status->name }}</td>
             <td>
-                <a href="{{ route("commissions-edit", ["id" => $commission->id]) }}">Edytuj</a>
+                <x-qqq-button label="Edytuj"
+                    :action="route('commissions-edit', ['id' => $commission->id])"
+                />
             </td>
         </tr>
         @empty
         <tr>
-            <td colspan="4">Brak zleceń na tapecie</td>
+            <td colspan="4" class="ghost">Brak zleceń na tapecie</td>
         </tr>
         @endforelse
     </tbody>

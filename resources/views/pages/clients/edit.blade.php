@@ -34,7 +34,9 @@
 
         <h2>Stawki</h2>
 
-        <a href="{{ route("prices-edit-for-client", ["client_id" => $client->id]) }}">Nowa</a>
+        <x-qqq-button label="Nowa"
+            :action="route('prices-edit-for-client', ['client_id' => $client->id])"
+        />
 
         <table>
             <thead>
@@ -52,12 +54,14 @@
                     <td>{{ asPln($price->price) }}</td>
                     <td>{{ $price->type->name }}</td>
                     <td>
-                        <a href="{{ route("prices-edit", ["id" => $price->id]) }}">Edytuj</a>
+                        <x-qqq-button label="Edytuj"
+                            :action="route('prices-edit', ['id' => $price->id])"
+                        />
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3">Brak stawek</td>
+                    <td colspan="3" class="ghost">Brak stawek</td>
                 </tr>
                 @endforelse
             </tbody>

@@ -3,7 +3,9 @@
 
 @section("content")
 
-<a href="{{ route("clients-edit") }}">Nowy</a>
+<x-qqq-button label="Nowy"
+    :action="route('clients-edit')"
+/>
 
 <table>
     <thead>
@@ -21,13 +23,17 @@
             <td>{{ $client->representative_name }}</td>
             <td>{{ $client->prices->count() }}</td>
             <td>
-                <a href="{{ route("commissions-list", ["client_id" => $client->id]) }}">Zlecenia</a>
-                <a href="{{ route("clients-edit", ["id" => $client->id]) }}">Edytuj</a>
+                <x-qqq-button label="Zlecenia"
+                    :action="route('commissions-list', ['client_id' => $client->id])"
+                />
+                <x-qqq-button label="Edytuj"
+                    :action="route('clients-edit', ['id' => $client->id])"
+                />
             </td>
         </tr>
         @empty
         <tr>
-            <td colspan="4">Brak klientów</td>
+            <td colspan="4" class="ghost">Brak klientów</td>
         </tr>
         @endforelse
     </tbody>

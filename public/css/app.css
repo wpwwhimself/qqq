@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=M+PLUS+Code+Latin:wght@100..700&display=swap');
+
+:root {
+    --acc: 54, 90%, 50%;
+}
+@media(prefers-color-scheme: dark) {
+    :root {
+        --fg: 0, 0%, 100%;
+        --bg: 0, 0%, 40%;
+        --bg2: 0, 0%, 55%;
+    }
+}
+@media(prefers-color-scheme: light) {
+    :root {
+        --fg: 0, 0%, 30%;
+        --bg: 0, 0%, 100%;
+        --bg2: 0, 0%, 85%;
+    }
+}
+
+body {
+    font-family: "M PLUS Code Latin", monospace;
+    background-color: hsl(var(--bg));
+    
+    max-width: 850px;
+    margin-inline: auto;
+}
+
+
+
+footer {
+    text-align: right;
+    border-top: 1px solid hsl(var(--bg2));
+    font-style: italic;
+}
+
+/****** spacing ******/
+
+.padded,
+.btn, input, textarea, select,
+th, td {
+    padding: 0.25em 1em;
+}
+
+.input-container, .callout-container,
+main,
+table {
+    margin-block: 0.25em;
+}
+
+/****** roundedness ******/
+
+.rounded,
+.btn, input, textarea, select {
+    border-radius: 0.5em;
+}
+
+
+/****** font colors ******/
+
+body {
+    color: hsl(var(--fg));
+}
+.ghost, small, label {
+    color: hsla(var(--fg), 0.5);
+}
+.accent,
+h2, .btn:hover {
+    color: hsl(var(--acc));
+}
+
+a {
+    color: inherit;
+}
+
+/****** font sizes ******/
+
+label {
+    font-size: 0.85em;
+}
+.btn, input, textarea, select {
+    font-size: 1em;
+}
+
+/****** animations ******/
+
+.animatable,
+.btn, input, textarea, select {
+    transition-duration: 0.2s;
+    transition-timing-function: ease-out;
+}
+
+/****** interactives ******/
+
+.clickable, .btn {
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+}
+
+.btn, input, textarea, select {
+    border: 1px solid hsla(var(--fg), 0.5);
+
+    &.active, &:focus {
+        border-color: hsl(var(--acc));
+        outline: none;
+    }
+}
+
+.btn {
+    font-family: inherit;
+    display: inline-block;
+    box-sizing: border-box;
+
+    background-color: hsl(var(--bg));
+}
+
+.input-container {
+    & input, & textarea, & select {
+        font-family: inherit;
+        width: 100%;
+        box-sizing: border-box;
+        
+        background-color: inherit;
+    }
+}
+
+/****** tables ******/
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+
+    & thead > tr {
+        background-color: hsl(var(--bg2));
+    }
+    
+    & th, & td {
+        text-align: left;
+    }
+}

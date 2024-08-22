@@ -4,7 +4,9 @@
 @section("content")
 
 @if (request("client_id"))
-<a href="{{ route("commissions-edit-for-client", ["client_id" => request("client_id")]) }}">Nowe</a>
+<x-qqq-button label="Nowe"
+    :action="route('commissions-edit-for-client', ['client_id' => request('client_id')])"
+/>
 @endif
 
 <table>
@@ -27,12 +29,14 @@
             <td>{{ $commission->status->name }}</td>
             <td>{{ $commission->total_hours_spent }}</td>
             <td>
-                <a href="{{ route("commissions-edit", ["id" => $commission->id]) }}">Edytuj</a>
+                <x-qqq-button label="Edytuj"
+                    :action="route('commissions-edit', ['id' => $commission->id])"
+                />
             </td>
         </tr>
         @empty
         <tr>
-            <td colspan="5">Brak zleceń</td>
+            <td colspan="5" class="ghost">Brak zleceń</td>
         </tr>
         @endforelse
     </tbody>

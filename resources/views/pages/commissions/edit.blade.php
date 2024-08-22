@@ -45,7 +45,9 @@
 
         <x-qqq-callout label="Łączny czas na tym zleceniu" :value="$commission->total_hours_spent" />
 
-        <a href="{{ route("sessions-edit-for-commission", ["commission_id" => $commission->id]) }}">Nowa</a>
+        <x-qqq-button label="Nowa"
+            :action="route('sessions-edit-for-commission', ['commission_id' => $commission->id])"
+        />
 
         <table>
             <thead>
@@ -61,12 +63,14 @@
                     <td>{{ $session->subject }}</td>
                     <td>{{ $session->hours_spent }}</td>
                     <td>
-                        <a href="{{ route("sessions-edit", ["id" => $session->id]) }}">Edytuj</a>
+                        <x-qqq-button label="Edytuj"
+                            :action="route('sessions-edit', ['id' => $session->id])"
+                        />
                     </td>
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="3">Brak sesji</td>
+                    <td colspan="3" class="ghost">Brak sesji</td>
                 </tr>
                 @endforelse
             </tbody>

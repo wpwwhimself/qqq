@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@yield("title") | {{ config('app.name') }}</title>
 
+    <link rel="stylesheet" href="{{ asset("css/app.css") }}">
     @bukStyles(true)
 </head>
 <body>
@@ -17,9 +18,13 @@
     </header>
 
     <nav>
-        <a href="{{ route('home') }}">Kokpit</a>
-        <a href="{{ route('clients-list') }}">Klienci</a>
-        <a href="{{ route('commissions-list') }}">Zlecenia</a>
+        @foreach ([
+            "Kokpit" => "home",
+            "Klienci" => "clients-list",
+            "Zlecenia" => "commissions-list",
+        ] as $label => $route)  
+        <x-qqq-button :action="route($route)" :label="$label" :active="Route::currentRouteName() == $route"/>
+        @endforeach
     </nav>
 
     <main>
@@ -27,7 +32,7 @@
     </main>
 
     <footer>
-        {{ config('app.name') }}
+        <h3>{{ config('app.name') }}</h3>
     </footer>
 
     @bukScripts(true)
