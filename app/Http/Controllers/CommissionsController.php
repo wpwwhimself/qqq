@@ -72,7 +72,7 @@ class CommissionsController extends Controller
             default:
                 Commission::updateOrCreate(["id" => $rq->id], [ "price_id" => $price_id, ...$rq->except(["_token", "method"])]);
         }
-        
+
         return redirect()->route("commissions-list");
     }
 
@@ -84,15 +84,14 @@ class CommissionsController extends Controller
         if ($session)
             $commission_id = $session->commission_id;
 
-        $commissions = Commission::orderByDesc("id")
-            ->where("id", $commission_id)
+        $subjects = CommissionSession::where("commission_id", $commission_id)
             ->get()
-            ->mapWithKeys(fn($comm) => ["$comm->id. $comm->name" => $comm->id]);
+            ->pluck("subject");
 
         return view("pages.sessions.edit", compact(
             "session",
             "commission_id",
-            "commissions",
+            "subjects",
         ));
     }
 
@@ -107,16 +106,17 @@ class CommissionsController extends Controller
 
     public function submitSession(Request $rq)
     {
+        $id = null;
         switch ($rq->method) {
             case "DELETE":
                 CommissionSession::findOrFail($rq->id)->delete();
                 break;
             default:
-                CommissionSession::updateOrCreate(["id" => $rq->id], $rq->except(["_token", "method"]));
+                $id = CommissionSession::updateOrCreate(["id" => $rq->id], $rq->except(["_token", "method"]));
         }
-        
-        return ($rq->commission_id)
-            ? redirect()->route("commissions-edit", ["id" => $rq->commission_id])
+
+        return ($rq->method != "DELETE")
+            ? redirect()->route("sessions-edit", ["id" => $id])
             : redirect()->route("commissions-list");
     }
 }

@@ -4,6 +4,6 @@
 ])
 
 <div class="callout-container">
-    <label>{{ $label }}</label>:
+    <label>{{ $label }}:</label>
     <strong>{{ $value }}</strong>
 </div>

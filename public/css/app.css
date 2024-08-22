@@ -5,9 +5,9 @@
 }
 @media(prefers-color-scheme: dark) {
     :root {
-        --fg: 0, 0%, 100%;
-        --bg: 0, 0%, 40%;
-        --bg2: 0, 0%, 55%;
+        --fg: 0, 0%, 70%;
+        --bg: 0, 0%, 10%;
+        --bg2: 0, 0%, 30%;
     }
 }
 @media(prefers-color-scheme: light) {
@@ -21,7 +21,7 @@
 body {
     font-family: "M PLUS Code Latin", monospace;
     background-color: hsl(var(--bg));
-    
+
     max-width: 850px;
     margin-inline: auto;
     padding-inline: 1em;
@@ -70,7 +70,7 @@ h2, .btn:hover {
     color: hsl(var(--acc));
 }
 
-a {
+a, input, textarea, select, .btn {
     color: inherit;
 }
 
@@ -121,7 +121,7 @@ label {
         font-family: inherit;
         width: 100%;
         box-sizing: border-box;
-        
+
         background-color: inherit;
     }
 }
@@ -136,7 +136,7 @@ table {
     & thead > tr {
         background-color: hsl(var(--bg2));
     }
-    
+
     & th, & td {
         text-align: left;
     }

@@ -18,7 +18,7 @@ class Commission extends Model
         "notes",
     ];
 
-    public function getTotalHoursSpentAttribute(): int
+    public function getTotalHoursSpentAttribute(): float
     {
         return $this->sessions->sum("hours_spent");
     }
