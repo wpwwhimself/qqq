@@ -30,6 +30,7 @@
         :value="$session?->notes"
     />
     
+    <x-qqq-callout label="Data rozpoczęcia" :value="$session?->created_at" />
     <x-qqq-input type="datetime-local"
         name="ended_at"
         label="Data zakończenia"

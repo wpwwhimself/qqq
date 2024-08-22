@@ -14,6 +14,7 @@
             <th>Nazwa</th>
             <th>Firma</th>
             <th>Status</th>
+            <th>Czas pośw.</th>
             <th></th>
         </tr>
     </thead>
@@ -24,13 +25,14 @@
             <td>{{ $commission->name }}</td>
             <td>{{ $commission->client->company_name }}</td>
             <td>{{ $commission->status->name }}</td>
+            <td>{{ $commission->total_hours_spent }}</td>
             <td>
                 <a href="{{ route("commissions-edit", ["id" => $commission->id]) }}">Edytuj</a>
             </td>
         </tr>
         @empty
         <tr>
-            <td colspan="4">Brak zleceń</td>
+            <td colspan="5">Brak zleceń</td>
         </tr>
         @endforelse
     </tbody>

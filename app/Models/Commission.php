@@ -18,6 +18,11 @@ class Commission extends Model
         "notes",
     ];
 
+    public function getTotalHoursSpentAttribute(): int
+    {
+        return $this->sessions->sum("hours_spent");
+    }
+
     public function client()
     {
         return $this->belongsTo(Client::class);
