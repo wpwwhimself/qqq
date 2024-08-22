@@ -21,6 +21,7 @@
             <td>{{ $client->representative_name }}</td>
             <td>{{ $client->prices->count() }}</td>
             <td>
+                <a href="{{ route("commissions-list", ["client_id" => $client->id]) }}">Zlecenia</a>
                 <a href="{{ route("clients-edit", ["id" => $client->id]) }}">Edytuj</a>
             </td>
         </tr>

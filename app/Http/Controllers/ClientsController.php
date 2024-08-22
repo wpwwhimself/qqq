@@ -9,7 +9,8 @@ class ClientsController extends Controller
 {
     public function list()
     {
-        $clients = Client::all();
+        $clients = Client::all()
+            ->sort(fn($a, $b) => $b->commissions->first()?->created_at <=> $a->commissions->first()?->created_at);
 
         return view("pages.clients.list", compact(
             "clients",

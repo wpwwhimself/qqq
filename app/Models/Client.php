@@ -22,6 +22,6 @@ class Client extends Model
     }
     public function commissions()
     {
-        return $this->hasMany(Commission::class);
+        return $this->hasMany(Commission::class)->orderByDesc("created_at");
     }
 }

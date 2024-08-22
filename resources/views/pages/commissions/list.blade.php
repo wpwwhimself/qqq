@@ -3,7 +3,9 @@
 
 @section("content")
 
-<a href="{{ route("commissions-edit") }}">Nowe</a>
+@if (request("client_id"))
+<a href="{{ route("commissions-edit-for-client", ["client_id" => request("client_id")]) }}">Nowe</a>
+@endif
 
 <table>
     <thead>

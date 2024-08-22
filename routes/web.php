@@ -25,6 +25,7 @@ Route::controller(PricesController::class)->prefix("prices")->group(function () 
 Route::controller(CommissionsController::class)->prefix("commissions")->group(function () {
     Route::get("", "list")->name("commissions-list");
     Route::get("edit/{id?}", "edit")->name("commissions-edit");
+    Route::get("edit/for-client/{client_id}", "editForClient")->name("commissions-edit-for-client");
     Route::post("submit", "submit")->name("commissions-submit");
 
     Route::prefix("sessions")->group(function () {

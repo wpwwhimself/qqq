@@ -22,7 +22,7 @@
     <x-qqq-select
         name="client_id"
         label="Klient"
-        :value="$commission?->client_id"
+        :value="$client_id ?? $commission?->client_id"
         :options="$clients"
     />
     
@@ -66,7 +66,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4">Brak stawek</td>
+                    <td colspan="4">Brak sesji</td>
                 </tr>
                 @endforelse
             </tbody>

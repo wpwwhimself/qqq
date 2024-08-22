@@ -14,16 +14,22 @@ class CommissionsController extends Controller
     public function list()
     {
         $commissions = Commission::orderByDesc("created_at")
-            ->get();
+            ->get()
+            ->filter(fn($comm) => request("client_id")
+                ? $comm->client_id == request("client_id")
+                : true
+            );
 
         return view("pages.commissions.list", compact(
             "commissions",
         ));
     }
 
-    public function edit(int $id = null)
+    private function editFunnel(int $id = null, int $client_id = null)
     {
         $commission = $id ? Commission::findOrFail($id) : null;
+        if ($commission)
+            $client_id = $commission->client_id;
 
         $clients = Client::orderBy("company_name")
             ->get()
@@ -36,10 +42,20 @@ class CommissionsController extends Controller
 
         return view("pages.commissions.edit", compact(
             "commission",
+            "client_id",
             "clients",
             "prices",
             "commissionStatuses",
         ));
+    }
+
+    public function edit(int $id = null)
+    {
+        return $this->editFunnel(id: $id);
+    }
+    public function editForClient(int $client_id = null)
+    {
+        return $this->editFunnel(client_id: $client_id);
     }
 
     public function submit(Request $rq)
