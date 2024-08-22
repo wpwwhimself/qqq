@@ -24,7 +24,7 @@ class Commission extends Model
     }
     public function status()
     {
-        return $this->belongsTo(CommissionStatus::class);
+        return $this->belongsTo(CommissionStatus::class, "commission_status_id");
     }
     public function sessions()
     {

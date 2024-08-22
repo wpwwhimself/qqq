@@ -18,6 +18,7 @@
             name="{{ $name }}"
             id="{{ $name }}"
             value="{{ $value }}"
+            {{ $attributes }}
         />
     @endswitch
 </div>

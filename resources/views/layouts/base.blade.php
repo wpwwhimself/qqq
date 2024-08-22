@@ -18,6 +18,7 @@
 
     <nav>
         <a href="{{ route('clients-list') }}">Klienci</a>
+        <a href="{{ route('commissions-list') }}">Zlecenia</a>
     </nav>
 
     <main>

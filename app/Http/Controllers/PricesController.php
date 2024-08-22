@@ -12,8 +12,11 @@ class PricesController extends Controller
     private function editFunnel(int $id = null, int $client_id = null)
     {
         $price = $id ? Price::findOrFail($id) : null;
+        if ($price)
+            $client_id = $price->client_id;
 
         $clients = Client::orderBy("company_name")
+            ->where("id", $client_id)
             ->get()
             ->pluck("id", "company_name");
         $priceTypes = PriceType::all()

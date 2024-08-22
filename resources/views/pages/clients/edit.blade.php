@@ -34,7 +34,7 @@
 
         <h2>Stawki</h2>
 
-        <a href="{{ route("prices-edit", ["client_id" => $client->id]) }}">Nowa</a>
+        <a href="{{ route("prices-edit-for-client", ["client_id" => $client->id]) }}">Nowa</a>
 
         <table>
             <thead>
@@ -52,7 +52,7 @@
                     <td>{{ asPln($price->price) }}</td>
                     <td>{{ $price->type->name }}</td>
                     <td>
-                        <a href="{{ route("prices-edit", ["id" => $price->id, "client_id" => $client->id]) }}">Edytuj</a>
+                        <a href="{{ route("prices-edit", ["id" => $price->id]) }}">Edytuj</a>
                     </td>
                 </tr>
                 @empty

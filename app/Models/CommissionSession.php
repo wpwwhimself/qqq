@@ -18,9 +18,12 @@ class CommissionSession extends Model
         "ended_at",
     ];
 
-    protected $dates = [
-        "ended_at",
-    ];
+    protected function casts(): array 
+    {
+        return [
+            "ended_at" => "datetime:Y-m-d H:i",
+        ];
+    }
 
     public function commission()
     {
