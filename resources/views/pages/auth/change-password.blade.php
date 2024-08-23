@@ -4,7 +4,7 @@
 
 @section("content")
 
-<form action="{{ route("login-submit") }}" method="post">
+<form action="{{ route("change-password") }}" method="post">
     @csrf
 
     <p>To hasło jest domyślne. Nie możesz z niego korzystać.</p>
@@ -15,7 +15,7 @@
         autofocus
     />
     <x-qqq-input type="password"
-        name="confirm_password"
+        name="password_confirmation"
         label="Powtórz hasło"
     />
 

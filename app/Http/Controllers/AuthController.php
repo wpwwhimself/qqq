@@ -7,6 +7,7 @@ use Database\Seeders\DatabaseSeeder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -29,7 +30,7 @@ class AuthController extends Controller
 
                 return ($password === DatabaseSeeder::BASE_PASSWORD)
                     ? view("pages.auth.change-password")
-                    : redirect()->intended()->route("home")->with("success", "Zalogowano");
+                    : redirect()->intended()->with("success", "Zalogowano");
             }
         }
 
@@ -37,12 +38,15 @@ class AuthController extends Controller
     }
 
     public function changePassword(Request $rq){
-        $rq->validate(['password' => ['required', 'confirmed']]);
+        $validator = Validator::make($rq->all(), [
+            'password' => ['required', 'confirmed'],
+        ]);
+        if ($validator->fails()) return view("pages.auth.change-password")->with("error", "Coś jest nie tak z hasłem");
 
         User::findOrFail(Auth::id())->update([
             "password" => Hash::make($rq->password),
         ]);
-        
+
         return redirect()->route("home")->with("success", "Hasło zmienione");
     }
 
