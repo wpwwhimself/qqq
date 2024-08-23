@@ -52,20 +52,25 @@
     />
     @endif
 
-
-    <x-qqq-button label="Wróć"
-        :action="route('commissions-edit', ['id' => $commission_id])"
-    />
-    <x-qqq-button label="Zapisz"
-        action="submit"
-    />
-    @if ($session)
-    <x-qqq-button label="Usuń"
-        action="submit"
-        name="method" value="DELETE"
-        class="danger"
-    />
-    @endif
+    <div class="flex-right stretch">
+        <div>
+            <x-qqq-button label="Zapisz"
+                action="submit"
+            />
+            @if ($session)
+            <x-qqq-button label="Usuń"
+                action="submit"
+                name="method" value="DELETE"
+                class="danger"
+            />
+            @endif
+        </div>
+        <div>
+            <x-qqq-button label="Wróć"
+                :action="route('commissions-edit', ['id' => $commission_id])"
+            />
+        </div>
+    </div>
 </form>
 
 <script>

@@ -49,6 +49,18 @@ table {
     margin-block: 0.25em;
 }
 
+
+/****** flexing ******/
+
+.flex-right {
+    display: flex;
+    flex-direction: row;
+
+    &.stretch {
+        justify-content: space-between;
+    }
+}
+
 /****** roundedness ******/
 
 .rounded,
