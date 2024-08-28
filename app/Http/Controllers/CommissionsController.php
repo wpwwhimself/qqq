@@ -8,12 +8,14 @@ use App\Models\CommissionSession;
 use App\Models\CommissionStatus;
 use App\Models\Price;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CommissionsController extends Controller
 {
     public function list()
     {
         $commissions = Commission::orderByDesc("created_at")
+            ->where(fn ($q) => (Auth::user()->is_admin) ? $q : $q->where("client_id", Auth::user()->client_id))
             ->get()
             ->filter(fn($comm) => request("client_id")
                 ? $comm->client_id == request("client_id")

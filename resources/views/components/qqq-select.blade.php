@@ -12,6 +12,7 @@
     <select
         name="{{ $name }}"
         id="{{ $name }}"
+        {{ $attributes }}
     >
         @if ($emptyOption)
         <option value="">{{ $emptyOption ?? "---" }}</option>

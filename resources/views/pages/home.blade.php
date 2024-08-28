@@ -24,7 +24,7 @@
             <td>{{ $commission->client->company_name }}</td>
             <td>{{ $commission->status->name }}</td>
             <td>
-                <x-qqq-button label="Edytuj"
+                <x-qqq-button :label="Auth::user()->is_admin ? 'Edytuj' : 'Zobacz'"
                     :action="route('commissions-edit', ['id' => $commission->id])"
                 />
             </td>

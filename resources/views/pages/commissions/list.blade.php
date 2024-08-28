@@ -29,7 +29,7 @@
             <td>{{ $commission->status->name }}</td>
             <td>{{ $commission->total_hours_spent }}</td>
             <td>
-                <x-qqq-button label="Edytuj"
+                <x-qqq-button :label="Auth::user()->is_admin ? 'Edytuj' : 'Zobacz'"
                     :action="route('commissions-edit', ['id' => $commission->id])"
                 />
             </td>

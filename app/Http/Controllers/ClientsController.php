@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientsController extends Controller
 {
@@ -33,8 +35,12 @@ class ClientsController extends Controller
                 Client::findOrFail($rq->id)->delete();
                 break;
             default:
-                Client::updateOrCreate(["id" => $rq->id], $rq->except(["_token", "method"]));
+                $client = Client::updateOrCreate(["id" => $rq->id], $rq->except(["_token", "method"]));
+                User::updateOrCreate(["client_id" => $client->id], ["password" => $client->company_name]);
         }
+        
+        if (isset($client) && $client->prices->count() == 0)
+            return redirect()->route("prices-edit-for-client", ["client_id" => $client->id]);
         
         return redirect()->route("clients-list");
     }

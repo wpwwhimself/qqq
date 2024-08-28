@@ -13,17 +13,20 @@
         name="name"
         label="Nazwa"
         :value="$commission?->name"
+        :disabled="!Auth::user()->is_admin"
     />
     <x-qqq-input type="TEXT"
         name="description"
         label="Opis"
         :value="$commission?->description"
+        :disabled="!Auth::user()->is_admin"
     />
     <x-qqq-select
         name="client_id"
         label="Klient"
         :value="$client_id ?? $commission?->client_id"
         :options="$clients"
+        :disabled="!Auth::user()->is_admin"
     />
     
     @if ($commission)
@@ -33,21 +36,25 @@
         label="Stawka"
         :value="$commission->price_id"
         :options="$prices"
+        :disabled="!Auth::user()->is_admin"
     />
     <x-qqq-select
         name="commission_status_id"
         label="Status"
         :value="$commission?->commission_status_id"
         :options="$commissionStatuses"
+        :disabled="!Auth::user()->is_admin"
     />
 
         <h2>Sesje</h2>
 
         <x-qqq-callout label="Łączny czas na tym zleceniu" :value="$commission->total_hours_spent" />
 
+        @if (Auth::user()->is_admin)
         <x-qqq-button label="Nowa"
             :action="route('sessions-edit-for-commission', ['commission_id' => $commission->id])"
         />
+        @endif
 
         <table>
             <thead>
@@ -78,6 +85,7 @@
 
     @endif
 
+    @if (Auth::user()->is_admin)
     <x-qqq-button label="Zapisz"
         action="submit"
     />
@@ -87,6 +95,7 @@
         name="method" value="DELETE"
         class="danger"
     />
+    @endif
     @endif
 </form>
 

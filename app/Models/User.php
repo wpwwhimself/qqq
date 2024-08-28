@@ -18,6 +18,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'password',
+        'client_id',
     ];
 
     /**
@@ -40,5 +41,10 @@ class User extends Authenticatable
         return [
             'password' => 'hashed',
         ];
+    }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->client_id === null;
     }
 }

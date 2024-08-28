@@ -17,15 +17,19 @@
         </h1>
     </header>
 
+    @auth
     <nav>
         @foreach ([
             "Kokpit" => "home",
             "Klienci" => "clients-list",
             "Zlecenia" => "commissions-list",
-        ] as $label => $route)  
-        <x-qqq-button :action="route($route)" :label="$label" :active="Route::currentRouteName() == $route"/>
+        ] as $label => $route)
+            @unless (!Auth::user()->is_admin && $label == "Klienci")
+            <x-qqq-button :action="route($route)" :label="$label" :active="Route::currentRouteName() == $route" />
+            @endunless
         @endforeach
     </nav>
+    @endauth
 
     <main>
         @yield("content")
