@@ -43,6 +43,11 @@ Route::controller(CommissionsController::class)->prefix("commissions")->group(fu
         Route::get("edit/for-commission/{commission_id}", "editSessionForCommission")->name("sessions-edit-for-commission");
         Route::post("submit", "submitSession")->name("sessions-submit");
     });
+
+    Route::prefix("settlements")->group(function () {
+        Route::get("{client_id}", "listSettlements")->name("settlements-list");
+        Route::get("download/{client_id}/{month}", "downloadSettlement")->name("settlements-download");
+    });
 });
 
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\CommissionSessionsExport;
 use App\Models\Client;
 use App\Models\Commission;
 use App\Models\CommissionSession;
@@ -9,6 +10,7 @@ use App\Models\CommissionStatus;
 use App\Models\Price;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CommissionsController extends Controller
 {
@@ -120,5 +122,29 @@ class CommissionsController extends Controller
         return ($rq->method != "DELETE")
             ? redirect()->route("sessions-edit", ["id" => $id])
             : redirect()->route("commissions-list");
+    }
+
+    //////////////////////////
+
+    public function listSettlements(int $client_id)
+    {
+        $client = Client::find($client_id);
+        $months = CommissionSession::whereHas(
+            "commission",
+            fn($q) => $q->where("client_id", $client_id)
+        )
+            ->get()
+           ->groupBy("month");
+
+        return view("pages.settlements.list", compact(
+            "client",
+            "months",
+        ));
+    }
+
+    public function downloadSettlement(int $client_id, string $month)
+    {
+        $client = Client::find($client_id);
+        return Excel::download(new CommissionSessionsExport($client_id, $month), "$client->company_name - rozliczenie $month.xlsx");
     }
 }

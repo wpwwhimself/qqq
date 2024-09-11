@@ -17,12 +17,20 @@ class CommissionSession extends Model
         "notes",
         "ended_at",
     ];
+    protected $appends = [
+        "month",
+    ];
 
     protected function casts(): array 
     {
         return [
             "ended_at" => "datetime:Y-m-d H:i",
         ];
+    }
+
+    public function getMonthAttribute(): string
+    {
+        return substr($this->created_at, 0, 7);
     }
 
     public function commission()

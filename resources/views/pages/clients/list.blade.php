@@ -26,6 +26,9 @@
                 <x-qqq-button label="Zlecenia"
                     :action="route('commissions-list', ['client_id' => $client->id])"
                 />
+                <x-qqq-button label="Rozliczenia"
+                    :action="route('settlements-list', ['client_id' => $client->id])"
+                />
                 <x-qqq-button label="Edytuj"
                     :action="route('clients-edit', ['id' => $client->id])"
                 />
