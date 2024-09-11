@@ -20,7 +20,7 @@
             <td>{{ $sessions->count() }}</td>
             <td>{{ asPln($sessions->sum("price")) }}</td>
             <td>
-                <x-qqq-button :label="Auth::user()->is_admin ? 'Edytuj' : 'Zobacz'"
+                <x-qqq-button label="Pobierz"
                     :action="route('settlements-download', ['client_id' => $client->id, 'month' => $month])"
                 />
             </td>
